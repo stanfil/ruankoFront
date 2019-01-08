@@ -14,16 +14,17 @@ const styles = theme => ({
   header: {
     marginTop: "20px",
     "font-weight": "200",
-    "font-size": "50px"
+    "font-size": "50px",
+    marginBottom: '20px'
   },
   neck: {
     width: "100%",
-    height: "150px",
+    // height: "150px",
     "background-color": "#f3f3f3",
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: '60px',
   },
   search: {
    display: 'flex',
@@ -63,7 +64,7 @@ const styles = theme => ({
    border: 'solid 1px #ccc',
  },
  logout: {
-   position: 'fixed',
+   position: 'absolute',
    top: "20px",
    right: '30px',
    outline: 'none',
@@ -75,6 +76,25 @@ const styles = theme => ({
      top: "18px",
      opacity: '.8',
    }
+ },
+ add: {
+   marginTop: '8px',
+   marginBottom: '5px',
+   display: 'flex',
+   alignItems: 'center',
+   "space-between": "5px"
+ },
+ addbtn: {
+   outline: "none",
+   "border": 0,
+   width: '50px',
+   height: '50px',
+   backgroundColor: '#f3f3f3',
+   color: '#cc669970',
+ },
+ addicon: {
+   width: '50px',
+   height: '50px',
  }
 })
 
@@ -86,6 +106,7 @@ class Topbar extends Component {
     }
     this.handleSearch = this.handleSearch.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.handleAdd = this.handleAdd.bind(this)
   }
 
   handleSearch = () => {
@@ -96,6 +117,10 @@ class Topbar extends Component {
 
   handleLogout = () => {
     this.props.handleLogout()
+  }
+
+  handleAdd = () => {
+    this.props.handleAdd()
   }
 
   render(){
@@ -115,10 +140,10 @@ class Topbar extends Component {
           </div>
           <div className={classes.add}>
             {(this.state.searched)?
-              (<span className={classes.tip}>没找到歌曲？快来添加</span>):''
+              (<span className={classes.tip}>没找到歌曲？快来添加吧</span>):''
             }
-            <button className={classes.addbtn}>
-              <AddCircleOutline />
+            <button onClick={()=>{ this.handleAdd() }} className={classes.addbtn}>
+              <AddCircleOutline className={classes.addicon} />
             </button>
           </div>
         </div>
