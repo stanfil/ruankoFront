@@ -23,6 +23,7 @@ const styles = theme => ({
     width: '50px',
     height: '40px',
     color: '#ef7e7e',
+    outline: 'none'
   },
   btncell: {
 
@@ -34,7 +35,7 @@ function ShowSearch(props) {
   const songs = props.songs.map((song) => ({
     mid: song.mid,
     title: song.title,
-    singers: song.singers.join(' '),
+    singers: song.singers.join('&'),
     album: song.album,
     time_public: song.time_public,
     type: song.type
