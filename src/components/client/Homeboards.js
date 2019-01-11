@@ -14,9 +14,14 @@ const styles = theme => ({
     paddingBottom: 30
   },
   root: {
-    display: 'relative'
+    display: 'flex',
+    width: 1035,
+    flexDirection: 'column',
+    alignItems: 'center'
   },
+
   header: {
+    width: '100%',
     display: "flex",
     flexDirection: 'row',
     justifyContent: 'center',
@@ -25,19 +30,21 @@ const styles = theme => ({
   hh2: {
     flexGrow: 1,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingLeft: 65
   },
   lists: {
+    width: "80%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: 'space-between'
+    justifyContent: 'space-around',
+    'align-self': 'center'
   },
   listbtn: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    "space-between": 10,
     border: 0,
     backgroundColor: "#f3f3f3"
   },

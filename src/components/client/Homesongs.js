@@ -12,7 +12,7 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     paddingBottom: 30
-    
+
   },
   root: {
     display: 'relative'
@@ -27,7 +27,8 @@ const styles = theme => ({
   hh2: {
     flexGrow: 1,
     display: 'flex',
-    justifyContent: 'center'
+    paddingLeft: 65,
+    justifyContent: 'center',
   },
   lists: {
     display: "flex",

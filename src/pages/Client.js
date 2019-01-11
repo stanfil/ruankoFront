@@ -9,6 +9,9 @@ import Search from './Search'
 import Login from './Login'
 import Me from './Me'
 import Home from './Home'
+import Boardmore from './Boardmore'
+import Listmore from './Listmore'
+import Songmore from './Songmore'
 
 const styles = theme => ({
   root: {
@@ -56,10 +59,14 @@ class Client extends Component {
         {
           (window.location.hash.substr(0,5)!=="#/CMS")?<Route render={(props) => <NavBar handleLogout={()=>{this.handleLogout()}} isLogin={this.state.isLogin} handleSearch={(label)=>{this.handleSearch(label)}} {...props}/>} />:""
         }
+        <Route exact path='/' render={(props)=><Home {...props}/>} />
         <Route path='/search' render={(props)=><Search label={this.state.label} {...props}/>} />
         <Route path='/login' render={(props)=><Login handleLogin={()=>{this.handleLogin()}} {...props}/>} />
         <Route path='/me' render={(props)=><Me {...props}/>} />
-        <Route exact path='/' render={(props)=><Home {...props}/>} />
+        <Route path='/boardmore' render={(props)=><Boardmore {...props}/>} />
+        <Route path='/listmore' render={(props)=><Listmore {...props}/>} />
+        <Route path='/songmore' render={(props)=><Songmore {...props}/>} />
+
         {
 
           // <Route path='/list/:id' render={(props)=><Listdetail {...props}/>}>
