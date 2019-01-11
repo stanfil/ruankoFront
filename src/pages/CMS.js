@@ -13,9 +13,11 @@ const styles = theme => ({
       width: "100%",
       display: "flex",
       flexDirection: "column",
-      alignItems: "center"
+      alignItems: "center",
   },
+  rootwrapper: {
 
+  }
 })
 
 class CMS extends Component {
@@ -95,11 +97,13 @@ class CMS extends Component {
   render() {
     const { classes } = this.props
     return (
-      <div className={ classes.root }>
+      <div className={ classes.rootwrapper}>
+        <div className={ classes.root }>
         <Route render={(props) => <Topbar {...props} handleAdd={()=>{this.handleAdd()}} handleLogout={()=>{this.handleLogout()}} handleSearch={(label) => { this.handleSearch(label) }}/>} />
         <Route exact path='/CMS/showsearch' render={(props) => <ShowSearch {...props} handleEdit={(mid) => { this.handleEdit(mid)}} handleDelete={(mid) => { this.handleDelete(mid)}} songs={this.state.songs}/>} />
         <Route path='/CMS/addsong' render={(props) => <AddSong {...props} AorU="Add"/>}/>
         <Route path='/CMS/updatesong' render={(props) => <AddSong {...props} song={this.state.editingSong} />} AorU="Update"/>
+        </div>
       </div>
 
     )

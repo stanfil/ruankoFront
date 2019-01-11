@@ -8,7 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { Paper, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search'
 
 const styles = theme => ({
@@ -181,16 +181,16 @@ class Search extends Component {
     })
     let pages = []
     for(let i=0; i<Math.ceil(this.state.all/10);i++){
-      pages.push(<button onClick={e=>{this.changePage(i+1)}} className={classes.page} key={i+1}>{i+1}</button>)
+      pages.push(<Button onClick={e=>{this.changePage(i+1)}} className={classes.page} key={i+1}>{i+1}</Button>)
     }
     return (
       <Paper className={classes.root}>
         <div className={classes.neck}>
           <div className={classes.search}>
             <input defaultValue={this.props.label} onKeyPress={e=>this.handleKeypress(e)} onChange={e=>{this.handleChange(e)}} className={classes.input} type="text" autoFocus placeholder="搜索关键字"/>
-            <button onClick={(e)=>{this.handleSearch(e)}} className={classes.searchIcon}>
+            <Button onClick={(e)=>{this.handleSearch(e)}} className={classes.searchIcon}>
               <SearchIcon />
-            </button>
+            </Button>
           </div>
         </div>
         <Table className={classes.table}>
@@ -218,12 +218,12 @@ class Search extends Component {
         <div className={classes.pages}>
           {
             (this.state.currentPage>1)?
-              <button onClick={e=>{this.lastPage()}} className={classes.page} >{'<'}</button>:''
+              <Button onClick={e=>{this.lastPage()}} className={classes.page} >{'<'}</Button>:''
           }
           {pages}
           {
             (this.state.currentPage<Math.ceil(this.state.all/10))?
-              <button onClick={e=>{this.nextPage()}} className={classes.page} >{'>'}</button>:''
+              <Button onClick={e=>{this.nextPage()}} className={classes.page} >{'>'}</Button>:''
           }
         </div>
       </Paper>

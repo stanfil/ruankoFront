@@ -91,7 +91,9 @@ class Login extends Component {
     }
     axios.post(`${Server}/user/login`, payload)
       .then( res => {
-        sessionStorage.setItem('user', res.data.user)
+        let {email, nickname} = res.data.user
+        sessionStorage.setItem('email', email)
+        sessionStorage.setItem('nickname', nickname)
         this.props.handleLogin()
         history.push('/me')
         console.log(res.data.message)
@@ -121,10 +123,8 @@ class Login extends Component {
         else {
           axios.post(`${Server}/user/signup`, payload)
             .then( res => {
-              sessionStorage.setItem('user', {
-                email: this.state.upemail,
-                nickname: this.state.nickname
-              })
+              sessionStorage.setItem('email', this.state.upemail)
+              sessionStorage.setItem('nickname', this.state.nickname)
               this.props.handleLogin()
               history.push('/me')
               console.log(res.data)
