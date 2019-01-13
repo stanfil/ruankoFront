@@ -130,7 +130,7 @@ class AddSong extends Component {
   }
   render(){
     const { classes, AorU } = this.props
-    const { song, ...values } = this.state
+    const { song, } = this.state
     return (
       <form className={classes.container} noValidate autoComplete="off">
         <TextField

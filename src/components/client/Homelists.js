@@ -15,7 +15,8 @@ const styles = theme => ({
 
   },
   root: {
-    display: 'relative'
+    display: 'relative',
+    width: '70%'
   },
   header: {
     display: "flex",
@@ -31,19 +32,43 @@ const styles = theme => ({
   },
   lists: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: 'space-between'
   },
   listbtn: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    "space-between": 10,
     border: 0,
-    backgroundColor: "#f3f3f3"
+    backgroundColor: "#f3f3f3",
+    outline: 'none',
+    cursor: 'pointer'
+  },
+  listWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  imgWrapper: {
+    display: "relative"
   },
   listimg: {
-    width: 195
+    width: 195,
+    cursor: 'pointer'
+  },
+  mask: {
+    display: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: '100%',
+    backgroundColor: '#000',
+    opacity: 0,
+    "&hover": {
+      opacity: 0.2
+    },
+    transition: "opacity .5s"
   },
   listp: {
     maxWidth: 195,
@@ -67,6 +92,7 @@ class Homelists extends Component {
 
     this.listClick = this.listClick.bind(this)
     this.listmore = this.listmore.bind(this)
+    this.playList = this.playList.bind(this)
   }
 
   componentWillMount(){
@@ -90,6 +116,16 @@ class Homelists extends Component {
     history.push(`/listmore`)
   }
 
+  playList = i => () => {
+    let { history } = this.props
+    axios.get(`${Server}/list/onelist?_id=${this.state.lists[i]._id}`)
+        .then(res=> {
+          let songs = res.data.songs.map(item=> item.mid)
+          this.props.updatePlaylist(songs)
+          history.push(`/player`)
+        })
+  }
+
   render(){
     const { classes } = this.props
     let lists = this.state.lists
@@ -98,16 +134,24 @@ class Homelists extends Component {
         <div className={classes.root}>
           <div className={classes.header}>
             <h2 className={classes.hh2}>歌单推荐</h2>
-            <Button onClick={()=>{this.listmore()}} className={classes.more}>更多</Button>
+            <Button onClick={()=>{this.listmore()}} className={classes.more}>{"更多 >"}</Button>
           </div>
           <div className={classes.lists}>
             {
               lists.map((list, i)=>(
-                <button key={i} className={classes.listbtn} onClick={()=>this.listClick(i)}>
-                <img className={classes.listimg} alt='' src={`http://${list.img_url}`} />
-                <p className={classes.listp}>{list.title}</p>
-                <span className={classes.listspan}>收藏量：{list.collectnum}</span>
-                </button>
+                <div className={classes.listWrapper} key={i}>
+                  <div className={classes.imgWrapper}>
+                    <img label="播放歌单" onClick={this.playList(i)} className={classes.listimg} alt='' src={`http://${list.img_url}`} />
+                    {/*<div className={classes.mask}>*/}
+                      {/*<span style={{fontSize:50, color: '#545454'}} className="iconfont">&#xe662;</span>*/}
+                    {/*</div>*/}
+                  </div>
+                  <button key={i} className={classes.listbtn} onClick={()=>this.listClick(i)}>
+                    <p className={classes.listp}>{list.title}</p>
+                    <span className={classes.listspan}>收藏量：{list.collectnum}</span>
+                  </button>
+                </div>
+
               ))
             }
           </div>

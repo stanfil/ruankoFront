@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { AppBar, Toolbar, IconButton, Typography, InputBase, } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, InputBase, } from '@material-ui/core'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import SearchIcon from '@material-ui/icons/Search';
 

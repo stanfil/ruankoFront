@@ -12,7 +12,11 @@ const styles = theme => ({
 class Home extends Component {
   constructor(props){
     super(props)
+    this.updatePlaylist = this.updatePlaylist.bind(this)
+  }
 
+  updatePlaylist(songs){
+      this.props.updatePlaylist(songs)
   }
 
   render(){
@@ -20,9 +24,9 @@ class Home extends Component {
 
     return (
       <div className={classes.root}>
-        <Homelists history={history} />
-        <Homesongs history={history} />
-        <Homeboards history={history} />
+        <Homelists updatePlaylist={(songs)=>{this.updatePlaylist(songs)}} history={history} />
+        <Homesongs updatePlaylist={(songs)=>{this.updatePlaylist(songs)}} history={history} />
+        <Homeboards updatePlaylist={(songs)=>{this.updatePlaylist(songs)}} history={history} />
       </div>
     )
   }
