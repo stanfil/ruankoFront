@@ -22,6 +22,15 @@ const styles = theme => ({
     menu: {
       width: 200,
     },
+    bottom: {
+      marginTop: 15,
+        display: 'flex',
+        alignItems: 'flex-end',
+        paddingLeft: 10
+    },
+    btn: {
+
+    }
 })
 
 const types = ['Pop','Rap/Hip Hop','Electronnica','Classical','Dance','Country','Folk','Holiday','J-Pop','Jazz','New Age','R&B','Rock','Soundtrack','World Music','Alternative','Children']
@@ -229,12 +238,15 @@ class AddSong extends Component {
             shrink: true,
           }}
         />
-        <Input type='file' inputRef={(input)=>{this.fileInput = input}}/>
-        {
-          (AorU==='Add')?
-          (<Button onClick={()=>{this.handleAdd()}}>添加</Button>):
-          (<Button onClick={()=>{this.handleUpdate()}}>修改</Button>)
-        }
+        <div className={classes.bottom}>
+            <input type='file' ref={(input)=>{this.fileInput = input}}/>
+            {
+                (AorU==='Add')?
+                    (<Button className={classes.btn} color={"primary"} variant={"outlined"} onClick={()=>{this.handleAdd()}}>添加</Button>):
+                    (<Button className={classes.btn} color={"primary"} variant={"outlined"} onClick={()=>{this.handleUpdate()}}>修改</Button>)
+            }
+        </div>
+
 
       </form>
     )

@@ -107,6 +107,7 @@ class Topbar extends Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
   handleSearch = () => {
@@ -123,6 +124,12 @@ class Topbar extends Component {
     this.props.handleAdd()
   }
 
+  handleKeyPress(e){
+    if(e.which === 13){
+      this.handleSearch()
+    }
+  }
+
   render(){
     const { classes } = this.props
     return (
@@ -133,7 +140,7 @@ class Topbar extends Component {
         <button onClick={()=> {this.handleLogout()}} className={classes.logout} >退出登录</button>
         <div className={ classes.neck }>
           <div className={classes.search}>
-            <input ref="_label" className={classes.input} type="text" autoFocus placeholder="搜索关键字"/>
+            <input onKeyPress={this.handleKeyPress} ref="_label" className={classes.input} type="text" autoFocus placeholder="搜索关键字"/>
             <button onClick={()=>{ this.handleSearch()}} className={classes.searchIcon}>
               <SearchIcon />
             </button>

@@ -16,7 +16,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: window.outerWidth,
+    width: "100vw",
+    position: 'relative'
   },
   menu: {
     position: "relative",
@@ -53,6 +54,7 @@ class Me extends Component {
     this.createlists = this.createlists.bind(this)
     this.changeinfo = this.changeinfo.bind(this)
     this.updateProfile = this.updateProfile.bind(this)
+    this.updateCreatelists = this.updateCreatelists.bind(this)
   }
 
   componentDidMount(){
@@ -104,6 +106,10 @@ class Me extends Component {
       })
   }
 
+  updateCreatelists(){
+    this.createlists()
+  }
+
   changeinfo() {
     let history = this.props.history
     if(window.location.hash!=='#/me/changeinfo'){
@@ -142,7 +148,7 @@ class Me extends Component {
           <Collectlists collectlists={this.state.collectlists} {...props} />
         )} />
         <Route path='/me/createlists' render={(props)=>(
-          <Createlists createlists={this.state.createlists} {...props} />
+          <Createlists updateCreatelists={this.updateCreatelists} createlists={this.state.createlists} {...props} />
         )} />
         <Route path='/me/changeinfo' render={(props)=>(
           <Changeinfo updateProfile={(nickname)=>{this.updateProfile(nickname)}} user={user} {...props} />

@@ -15,7 +15,7 @@ const styles = theme => ({
   },
   root: {
     display: 'flex',
-    width: 1035,
+    width: "60%",
     flexDirection: 'column',
     alignItems: 'center'
   },
@@ -159,14 +159,14 @@ class Homeboards extends Component {
         <div className={classes.root}>
           <div className={classes.header}>
             <h2 className={classes.hh2}>排行榜</h2>
-            <Button onClick={()=>{this.boardmore()}} className={classes.more}>更多</Button>
+            <Button onClick={()=>{this.boardmore()}} className={classes.more}>{"更多 >"}</Button>
           </div>
           <div className={classes.lists}>
             <div className={classes.boardnew}>
               <h2>新歌榜</h2>
               {
                 newsongs.map((song, i)=>(
-                  <button key={i} onClick={()=>{this.songClick(song.mid)}} className={classes.songbtn}>
+                  <button style={{outline: 'none'}} key={i} onClick={()=>{this.songClick(song.mid)}} className={classes.songbtn}>
                     <span>{`${i+1} ${song.title}`}</span>
                     <span>{`  ${song.singers.join(' / ')}`}</span>
                   </button>
@@ -177,7 +177,7 @@ class Homeboards extends Component {
               <h2>热歌榜</h2>
               {
                 hotsongs.map((song, i)=>(
-                  <button key={i} onClick={()=>{this.songClick(song.mid)}} className={classes.songbtn}>
+                  <button style={{outline: 'none'}} key={i} onClick={()=>{this.songClick(song.mid)}} className={classes.songbtn}>
                     <span>{`${i+1} ${song.title}`}</span>
                     <span>{`  ${song.singers.join(' / ')}`}</span>
                   </button>
@@ -188,7 +188,7 @@ class Homeboards extends Component {
               <h2>飙升榜</h2>
               {
                 upsongs.map((song, i)=>(
-                  <button key={i} onClick={()=>{this.songClick(song.mid)}} className={classes.songbtn}>
+                  <button style={{outline: 'none'}} key={i} onClick={()=>{this.songClick(song.mid)}} className={classes.songbtn}>
                     <span>{`${i+1} ${song.title}`}</span>
                     <span>{`  ${song.singers.join(' / ')}`}</span>
                   </button>

@@ -15,7 +15,8 @@ const styles = theme => ({
 
   },
   root: {
-    display: 'relative'
+    display: 'relative',
+    width: '60%'
   },
 
   header: {
@@ -32,19 +33,43 @@ const styles = theme => ({
   },
   lists: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: 'space-between'
   },
   listbtn: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    "space-between": 10,
     border: 0,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    outline: 'none',
+    cursor: 'pointer'
+  },
+  listWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  imgWrapper: {
+    display: "relative"
   },
   listimg: {
-    width: 195
+    width: 195,
+    cursor: 'pointer'
+  },
+  mask: {
+    display: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: '100%',
+    backgroundColor: '#000',
+    opacity: 0,
+    "&hover": {
+      opacity: 0.2
+    },
+    transition: "opacity .5s"
   },
   listp: {
     maxWidth: 195,
@@ -74,6 +99,7 @@ class Homesongs extends Component {
     this.songClick = this.songClick.bind(this)
     this.songmore = this.songmore.bind(this)
     this.songtype = this.songtype.bind(this)
+    this.playSong = this.playSong.bind(this)
   }
 
   componentWillMount(){
@@ -97,6 +123,12 @@ class Homesongs extends Component {
     history.push(`/songmore`)
   }
 
+  playSong = i => () => {
+    let { history } = this.props
+    this.props.updatePlaylist([this.state.songs[i].mid])
+    history.push(`/player`)
+  }
+
   songtype = type => () => {
     axios.get(`${Server}/song/bytype?type=${type}&page=1`)
       .then( res => {
@@ -115,7 +147,7 @@ class Homesongs extends Component {
         <div className={classes.root}>
           <div className={classes.header}>
             <h2 className={classes.hh2}>新歌首发</h2>
-            <Button onClick={()=>{this.songmore()}} className={classes.more}>更多</Button>
+            <Button onClick={()=>{this.songmore()}} className={classes.more}>{"更多 >"}</Button>
           </div>
           <div className={classes.navbar}>
             <Button className={classes.songtype} onClick={this.songtype('Pop')}>流行</Button>
@@ -123,14 +155,21 @@ class Homesongs extends Component {
             <Button className={classes.songtype} onClick={this.songtype('RandB')}>R&B</Button>
             <Button className={classes.songtype} onClick={this.songtype('Electronica')}>电子</Button>
           </div>
+
+
           <div className={classes.lists}>
           {
             songs.map((song, i)=>(
-              <button key={i} className={classes.listbtn} onClick={()=>this.songClick(i)}>
-              <img className={classes.listimg} alt='' src={`http://${song.img_url}`} />
-              <p className={classes.listp}>{song.title}</p>
-              <span className={classes.listspan}>{song.singers.join(' / ')}</span>
-              </button>
+                <div className={classes.listWrapper} key={i}>
+                  <div className={classes.imgWrapper}>
+                    <img label="播放歌曲" onClick={this.playSong(i)} className={classes.listimg} alt='' src={`http://${song.img_url}`} />
+                  </div>
+                  <button key={i} className={classes.listbtn} onClick={()=>this.songClick(i)}>
+                    <p className={classes.listp}>{song.title}</p>
+                    <span className={classes.listspan}>{song.singers.join(' / ')}</span>
+                  </button>
+                </div>
+
             ))
           }
           </div>

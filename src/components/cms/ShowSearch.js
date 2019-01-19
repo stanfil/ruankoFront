@@ -11,7 +11,7 @@ const styles = theme => ({
   root: {
     width: '80%',
     marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
+    // overflowY: 'auto',
   },
   table: {
     minWidth: 700,

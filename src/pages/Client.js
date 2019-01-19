@@ -20,7 +20,7 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-      height: "100vh"
+      minheight: "100vh"
   }
 })
 
@@ -77,7 +77,7 @@ class Client extends Component {
         <Route path='/listmore' render={(props)=><Listmore {...props}/>} />
         <Route path='/songmore' render={(props)=><Songmore {...props}/>} />
         <Route path='/list/:_id' render={(props)=><List {...props}/>} />
-        <Route path='/song/:mid' render={(props)=><Song {...props}/>} />
+        <Route path='/song/:mid' render={(props)=><Song updatePlaylist={(songs)=>this.updatePlaylist(songs)} {...props}/>} />
         <Route path='/player' render={(props)=><Player playlist={this.state.playlist} {...props}/>} />
 
         {

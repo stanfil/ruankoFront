@@ -6,8 +6,8 @@ const styles = theme => ({
   root: {
     "background-image": `url(${require('../../img/bg_profile.jpg')})`,
     "background-position": 'bottom center',
-    height: 280,
-    width: window.outerWidth,
+    minHeight: 280,
+    width: "100%",
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

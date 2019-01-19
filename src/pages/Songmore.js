@@ -33,6 +33,7 @@ const styles = theme => ({
 
   },
   listbtn: {
+    outline: 'none',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -136,7 +137,7 @@ class Songmore extends Component {
     const typesCN = ['流行','嘻哈','电子','古典','舞曲','乡村','民谣','节日','日本流行','爵士','新世纪','节奏布鲁斯','摇滚','英伦摇滚','世界音乐','另类摇滚','童谣']
     let pages = []
     for(let i=0; i<Math.ceil(this.state.all/10);i++){
-      pages.push(<Button onClick={e=>{this.changePage(i+1)}} className={classes.page} key={i+1}>{i+1}</Button>)
+      pages.push(<Button style={{backgroundColor: `${this.state.currentPage===(i+1)?"#31c27c":""}`}} onClick={e=>{this.changePage(i+1)}} className={classes.page} key={i+1}>{i+1}</Button>)
     }
     return (
       <div className={classes.root}>

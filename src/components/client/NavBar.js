@@ -9,40 +9,49 @@ const styles = theme => ({
   root: {
     width: '70%',
   },
+  appBar: {
+
+  },
   nav: {
-    color: 'white',
-    marginLeft: 20,
+    color: '#000',
+    textDecoration: 'none',
+    paddingLeft: 30,
+    paddingRight: 30,
+    height: "64px",
+    display: 'flex',
+    alignItems: 'center'
   },
   login: {
-    marginLeft: 20,
-    color: 'white',
+    color: '#000',
+    marginLeft: 40,
+    textDecoration: 'none',
   },
   grow: {
     flexGrow: 1,
   },
   title: {
-    color: 'white',
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+    fontWeight: 400,
+    fontSize:26,
+    paddingBottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    marginLeft: 10,
+    marginRight: '20px'
+
   },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing.unit,
       width: 'auto',
     },
+    border: '1px solid #b7b1b1'
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
+    width: 40,
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -58,16 +67,23 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create('width'),
-    width: 200,
+    paddingLeft: 40,
+    width: "100%",
   },
+  logo: {
+    textDecoration: 'none',
+    color: '#000',
+    display: 'flex',
+    marginRight: '20'
+  }
 })
 
 class NavBar extends Component {
   constructor(props){
     super(props)
-
+    this.state = {
+      active: 0
+    }
     this.handleKeypress = this.handleKeypress.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
 
@@ -99,16 +115,17 @@ class NavBar extends Component {
     const { classes } = this.props
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <div className={classes.appBar}>
           <Toolbar>
-            <a href='/#/'>
-              <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            <a onClick={()=>{this.setState({active: 0})}} className={classes.logo} href='/#/'>
+              <img style={{}} src={require('../../img/logo.png')} alt=""/>
+              <div className={classes.title}>
               软酷音乐
-              </Typography>
+              </div>
             </a>
 
-            <a className={classes.nav} href='/#/'>音乐馆</a>
-            <a className={classes.nav} href={(this.props.isLogin?'/#/me':'/#/login')}>我的音乐</a>
+            <a onClick={()=>{this.setState({active: 0})}} style={{backgroundColor: `${this.state.active?"#fff":"#31c27c"}`}} className={classes.nav} href='/#/'>音乐馆</a>
+            <a onClick={()=>{this.setState({active: 1})}} style={{backgroundColor: `${!(this.state.active)?"#fff":"#31c27c"}`}} className={classes.nav} href={(this.props.isLogin?'/#/me':'/#/login')}>我的音乐</a>
             <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -127,12 +144,12 @@ class NavBar extends Component {
             </div>
             {
               (this.props.isLogin)?
-              <a onClick={(e)=>{this.handleLogout(e)}} className={classes.login} href='/#/'>退出登录</a>:
+              <a onClick={(e)=>{this.setState({active: 0}); this.handleLogout(e)}} className={classes.login} href='/#/'>退出登录</a>:
               <a className={classes.login} href='/#/login'>登录</a>
             }
 
           </Toolbar>
-        </AppBar>
+        </div>
       </div>
     )
   }

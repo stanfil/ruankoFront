@@ -4,7 +4,10 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core'
 const styles = theme => ({
   root:{
-
+    width: 800,
+  },
+  table: {
+    width: "100%"
   }
 })
 
@@ -33,7 +36,12 @@ class Collectlists extends Component {
             {lists.map((list, i) => {
               return (
                 <TableRow key={i}>
-                  <TableCell >{list.title}</TableCell>
+
+                  <TableCell >
+                    <a style={{color: '#000', textDecoration: "none"}} href={`/#/list/${list._id}`}>
+                    {list.title}
+                    </a>
+                  </TableCell>
                   <TableCell >{list.creator}</TableCell>
                   <TableCell >{list.collectnum}</TableCell>
                 </TableRow>

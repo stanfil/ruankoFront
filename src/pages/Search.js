@@ -17,6 +17,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+      minHeight: 'calc(100vh - 64px)',
+      paddingBottom: '15px',
   },
   table: {
     maxWidth: '70%',
@@ -47,6 +49,7 @@ const styles = theme => ({
     alignItems: 'center',
   },
   search: {
+      position: 'relative',
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'center',
@@ -55,16 +58,16 @@ const styles = theme => ({
    paddingRight: 0
  },
   searchIcon: {
+      position: 'relative',
+      left: '-64px',
    border: 0,
    backgroundColor: "#fff",
    width: '50px',
    height: '50px',
-   position: 'relative',
    // pointerEvents: 'none',
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'center',
-   right: "50px",
    opacity: '0.8',
    '&:hover': {
      color: '#31c27c',
@@ -73,7 +76,6 @@ const styles = theme => ({
    outline: 'none',
  },
   input: {
-   marginLeft: '50px',
    width: '100%',
    height: '100%',
    paddingLeft: "8px",
@@ -86,7 +88,8 @@ const styles = theme => ({
  pages: {
    display: 'flex',
    flexDirection:'row',
-   justifyContent: 'center'
+   justifyContent: 'center',
+     marginTop: '20px'
  }
 });
 
@@ -181,7 +184,7 @@ class Search extends Component {
     })
     let pages = []
     for(let i=0; i<Math.ceil(this.state.all/10);i++){
-      pages.push(<Button onClick={e=>{this.changePage(i+1)}} className={classes.page} key={i+1}>{i+1}</Button>)
+      pages.push(<Button style={{backgroundColor: `${this.state.currentPage===(i+1)?"#31c27c":""}`}} onClick={e=>{this.changePage(i+1)}} className={classes.page} key={i+1}>{i+1}</Button>)
     }
     return (
       <Paper className={classes.root}>
@@ -206,7 +209,11 @@ class Search extends Component {
             {songs.map((song, i) => {
               return (
                 <TableRow key={i}>
-                  <TableCell >{song.title}</TableCell>
+                    <TableCell >
+                        <a style={{color: '#000', textDecoration: "none"}} href={`/#/song/${song.mid}`}>
+                            {song.title}
+                        </a>
+                    </TableCell>
                   <TableCell >{song.singers}</TableCell>
                   <TableCell >{song.album}</TableCell>
                   <TableCell >{song.interval}</TableCell>

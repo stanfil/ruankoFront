@@ -31,10 +31,11 @@ const styles = theme => ({
   songp: {
     "font-size": 25,
     "font-weight": 400,
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 10
   },
   singers: {
-    marginTop: 20,
+    marginTop: 15,
     "font-weight": 300,
     color: '#333'
   },
@@ -69,7 +70,8 @@ const styles = theme => ({
     background: 'none',
     border: 0,
     outline: "none",
-    cursor: "pointer"
+    cursor: "pointer",
+    marginBottom: 40,
   }
 })
 
@@ -83,6 +85,7 @@ class Song extends Component {
       }
     }
     this.changeLrcState = this.changeLrcState.bind(this)
+    this.playsong = this.playsong.bind(this)
   }
 
   componentWillMount(){
@@ -102,6 +105,11 @@ class Song extends Component {
       showAlllrc: !this.state.showAlllrc
     })
   }
+  playsong (){
+    let { history } = this.props
+    this.props.updatePlaylist([this.state.song.mid])
+    history.push('/player')
+  }
   render(){
     const { classes, } = this.props
     let song = this.state.song
@@ -111,7 +119,7 @@ class Song extends Component {
       lrcarr = getLrcArray(song.lyric)
       console.log(lrcarr)
     }
-    // console.log(lrcarr)
+    console.log(lrcarr)
     return (
       <div className={classes.root}>
         <div className={classes.header}>
@@ -124,10 +132,7 @@ class Song extends Component {
             <p>类型：{song.type}</p>
             <p>发行时间：{song.time_public}</p>
             <div className={classes.songops}>
-            <Button>播放</Button>
-            <Button>收藏</Button>
-            <Button>添加到</Button>
-            <Button>下载</Button>
+            <Button variant='outlined' color='primary' onClick={this.playsong}>立即播放</Button>
             </div>
             </div>
           </div>

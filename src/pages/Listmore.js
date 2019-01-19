@@ -33,6 +33,7 @@ const styles = theme => ({
 
   },
   listbtn: {
+    outline: 'none',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -114,7 +115,7 @@ class Listmore extends Component {
     const lists = this.state.lists
     let pages = []
     for(let i=0; i<Math.ceil(this.state.all/10);i++){
-      pages.push(<Button onClick={e=>{this.changePage(i+1)}} className={classes.page} key={i+1}>{i+1}</Button>)
+      pages.push(<Button style={{backgroundColor: `${this.state.currentPage===(i+1)?"#31c27c":""}`}} onClick={e=>{this.changePage(i+1)}} className={classes.page} key={i+1}>{i+1}</Button>)
     }
     return (
       <div className={classes.root}>

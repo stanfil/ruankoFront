@@ -26,6 +26,41 @@
           </option>
           <option name="userDatabase" value="ruanko" />
         </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="ruankomusic" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="ruanko" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="test" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="ruanko" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="ruanko" />
+        </ServerConfiguration>
       </list>
     </option>
   </component>

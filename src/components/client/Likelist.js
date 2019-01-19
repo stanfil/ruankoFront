@@ -4,7 +4,10 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core'
 const styles = theme => ({
   root:{
-
+    width: 800,
+  },
+  table: {
+    width: "100%"
   }
 })
 
@@ -45,7 +48,11 @@ class Likelist extends Component {
             {songs.map((song, i) => {
               return (
                 <TableRow key={i}>
-                  <TableCell >{song.title}</TableCell>
+                  <TableCell >
+                    <a style={{color: '#000', textDecoration: "none"}} href={`/#/song/${song.mid}`}>
+                    {song.title}
+                    </a>
+                  </TableCell>
                   <TableCell >{song.singers}</TableCell>
                   <TableCell >{song.album}</TableCell>
                   <TableCell >{song.interval}</TableCell>

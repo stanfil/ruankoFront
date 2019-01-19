@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core'
+import { Button, Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core'
 import axios from 'axios'
 import { Server } from '../setting'
 const styles = theme => ({
@@ -24,16 +24,19 @@ const styles = theme => ({
     flexGrow: 1
   },
   listp: {
-    "font-size": 30,
-    "font-weight": 400
+    "font-size": 28,
+    "font-weight": 400,
+    opacity: .7
   },
   creator: {
-    marginTop: 60,
+    marginTop: 40,
     "font-weight": 300,
     color: '#333'
   },
   table: {
-    maxWidth: "70%"
+    maxWidth: "70%",
+    marginBottom: 40
+
   },
   tabletitle: {
     display: 'flex',
@@ -56,7 +59,7 @@ const styles = theme => ({
   },
   discp: {
     "font-weight": 300
-  }
+  },
 })
 
 class List extends Component {
@@ -64,9 +67,11 @@ class List extends Component {
     super(props)
     this.state = {
       list: {
-        songs: []
-      }
+        songs: [],
+      },
+      isLogin: (sessionStorage.getItem("email"))?true:false,
     }
+    this.likeList=this.likeList.bind(this)
   }
 
   componentWillMount(){
@@ -79,6 +84,21 @@ class List extends Component {
           list: res.data
         })
       })
+  }
+
+  likeList(){
+    if(!this.state.isLogin){
+      alert("请登录后收藏~")
+      return
+    }
+    const _id = this.state.list._id
+    const email = sessionStorage.getItem("email")
+    axios.post(`${Server}/user/collectlist`,{
+      email,
+      _id
+    }).then(res=>{
+      alert(res.data)
+    })
   }
 
   render(){
@@ -104,10 +124,11 @@ class List extends Component {
           <div className={classes.listinfo}>
             <p className={classes.listp}>{list.title}</p>
             <div className={classes.creator}><img alt='' style={{marginRight: 10}} src={require('../img/user.png')} />{list.creator}</div>
-            <p>收藏量：{list.collectnum}</p>
+            <p style={{fontSize: 16}}>收藏量：{list.collectnum}</p>
+            <Button variant="outlined" color="primary" style={{fontSize: 16}} onClick={this.likeList}>收藏歌单</Button>
           </div>
           <div className={classes.disc}>
-            <p className={classes.discp} style={{"font-size": 24}}>简介</p>
+            <p className={classes.discp} style={{"fontSize": 24}}>简介</p>
             <p className={classes.discp} >{list.disc}</p>
           </div>
         </div>
@@ -129,7 +150,9 @@ class List extends Component {
                     <TableCell >{i+1}</TableCell>
                     <TableCell className={classes.tabletitle}>
                       <img className={classes.img} alt='' src={`http://${song.img_url}`} />
-                      <span className={classes.tablespan}>{`${song.title}`}</span>
+                      <a className={classes.tablespan} style={{color: '#000', textDecoration: "none"}} href={`/#/song/${song.mid}`}>
+                        {song.title}
+                      </a>
                     </TableCell>
                     <TableCell >{song.singers}</TableCell>
                     <TableCell >{song.album}</TableCell>

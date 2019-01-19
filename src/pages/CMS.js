@@ -14,10 +14,11 @@ const styles = theme => ({
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      minHeight: '100vh'
   },
-  rootwrapper: {
-
-  }
+    rootwrapper: {
+        paddingBottom: 40,
+    }
 })
 
 class CMS extends Component {
@@ -93,6 +94,8 @@ class CMS extends Component {
     console.log(this.state.editingSong)
     history.push('/CMS/updatesong')
   }
+
+
 
   render() {
     const { classes } = this.props

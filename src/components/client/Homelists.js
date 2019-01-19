@@ -16,7 +16,7 @@ const styles = theme => ({
   },
   root: {
     display: 'relative',
-    width: '70%'
+    width: '60%'
   },
   header: {
     display: "flex",

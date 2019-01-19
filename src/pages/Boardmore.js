@@ -15,7 +15,8 @@ const styles = theme => ({
   navbar: {
     marginTop: 30,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: 80
   },
   navbtn:{
     "font-size": 20,
@@ -30,6 +31,9 @@ const styles = theme => ({
   },
   tablespan: {
     marginLeft: 20
+  },
+  tableWrapper: {
+    height: "100%"
   }
 })
 

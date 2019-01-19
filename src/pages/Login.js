@@ -35,12 +35,15 @@ const styles = theme => ({
     height: 50,
     display: "flex",
     flexDirection: "row",
+
   },
   li: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    flexGrow:1
+    flexGrow:1,
+      color: "#000",
+      opacity: .8
   },
   form: {
     // width: "100%",
@@ -76,6 +79,7 @@ class Login extends Component {
       nickname: '',
       inpassword: '',
       uppassword: '',
+        active: 0
     }
 
     this.handleSignup = this.handleSignup.bind(this)
@@ -149,11 +153,15 @@ class Login extends Component {
           <Paper className={classes.paper}>
             <Route render={(props)=>(
               <div className={classes.lists}>
-                <li className={classes.li}>
-                  <NavLink to='/login'>登录</NavLink>
+                <li style={{backgroundColor: `${this.state.active?'':'#f5005780'}`}} className={classes.li}>
+                  <a style={{color: '#000', textDecoration: 'none'}} href='/#/login'
+                    onClick={()=>{this.setState({active: 0})}}
+                  >登录</a>
                 </li>
-                <li className={classes.li}>
-                  <NavLink to='/login/signup'>注册</NavLink>
+                <li style={{backgroundColor: `${this.state.active?'#f5005780':''}`}} className={classes.li}>
+                  <a style={{color: '#000', textDecoration: 'none'}} href='/#/login/signup'
+                       onClick={()=>{this.setState({active: 1})}}
+                  >注册</a>
                 </li>
               </div>
             )} />

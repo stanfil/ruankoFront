@@ -13,7 +13,15 @@ const styles = theme => ({
     top: '0',
   },
   main: {
+    position: 'fixed',
+    top: '64px',
+    right: 0,
+    left: 0,
     paddingTop: '10%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
